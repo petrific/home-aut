@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM arm32v7/node
 RUN apt-get update
 RUN apt-get install -y libpcap-dev
 RUN npm install ping
