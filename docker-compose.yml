@@ -1,0 +1,33 @@
+version: '3'
+services:
+  dash:
+    labels:
+      name: "dash-node"
+    build:
+      context: ./SmartHome.DashListener
+      dockerfile: DockerFile
+    hostname: "dashMonitor1"
+    network_mode: "host"
+    ipc: host
+    privileged: true
+    ports:
+      - "67:67"
+      - "68:68"
+  mongo:
+    image: mongo:latest
+    hostname: "mongo1"
+    ports:
+      - "27017:27017"
+  rabbit:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit1"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "8080:8080"
+    labels:
+      NAME: "rabbit1"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
